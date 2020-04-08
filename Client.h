@@ -6,12 +6,15 @@ using namespace std;
 class Client
 {
 private:
-    int code;
-    string name;
+	static int objectsCount;
+	int code;
+	string name;
 public:
-    Client(int c, string n);
-    ~Client();
+	static int GetObjectsCount();
 
-    int GetCode();
-    string GetName();
+	Client(int c, string n);
+	~Client();
+
+	int GetCode();
+	string GetName();
 };

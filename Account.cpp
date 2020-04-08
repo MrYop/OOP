@@ -1,4 +1,22 @@
 #include "Account.h"
+int Account::objectsCounter = 0;
+double Account::interestRate = 0.001;
+
+int Account::GetObjectsCounter()
+{
+	return Account::objectsCounter;
+}
+
+double Account::GetInterestRate()
+{
+	return Account::interestRate;
+}
+
+void Account::SetInterestRate(double ir)
+{
+	Account::interestRate = ir;
+}
+
 Account::Account(int n, Client* c)
 {
 	this->balance = 0;
@@ -6,6 +24,7 @@ Account::Account(int n, Client* c)
 	this->number = n;
 	owner = c;
 	partner = NULL;
+	Account::objectsCounter++;
 }
 
 Account::Account(int n, Client* c, double ir)
@@ -15,6 +34,7 @@ Account::Account(int n, Client* c, double ir)
 	owner = c;
 	this->interestRate = ir;
 	partner = NULL;
+	Account::objectsCounter++;
 }
 
 Account::Account(int n, Client* c, Client* p)
@@ -24,6 +44,7 @@ Account::Account(int n, Client* c, Client* p)
 	this->number = n;
 	owner = c;
 	partner = p;
+	Account::objectsCounter++;
 }
 
 Account::Account(int n, Client* c, Client* p, double ir)
@@ -33,61 +54,10 @@ Account::Account(int n, Client* c, Client* p, double ir)
 	owner = c;
 	partner = p;
 	this->interestRate = ir;
+	Account::objectsCounter++;
 }
 
 Account::~Account()
 {
-	delete& number;
-	delete& balance;
-	delete& interestRate;
-	delete owner;
-	delete partner;
-}
-
-int Account::GetNumber()
-{
-	return this->number;
-}
-
-double Account::GetBalance()
-{
-	return this->balance;
-}
-
-double Account::GetInterestRate()
-{
-	return this->interestRate;
-}
-
-Client* Account::GetOwner()
-{
-	return owner;
-}
-
-Client* Account::GetPartner()
-{
-	return partner;
-}
-
-bool Account::CanWithdraw(double a)
-{
-	if (a > this->balance) return false;
-	return true;
-}
-
-void Account::Deposit(double a)
-{
-	this->balance += a;
-}
-
-bool Account::Withdraw(double a)
-{
-	if (a > this->balance) return false;
-	this->balance -= a;
-	return true;
-}
-
-void Account::AddInterest()
-{
-	this->balance += balance * interestRate;
+	Account::objectsCounter--;
 }

@@ -1,22 +1,29 @@
 #include "Client.h"
+int Client::objectsCount = 0;
+
 Client::Client(int c, string n)
 {
 	this->code = c;
 	this->name = n;
+	Client::objectsCount++;
 }
 
 Client::~Client()
 {
-	delete& name;
-	delete& code;
+	Client::objectsCount--;
+}
+
+int Client::GetObjectsCount()
+{
+	return Client::objectsCount;
 }
 
 int Client::GetCode()
 {
-	return this->code;
+	return Client::code;
 }
 
 string Client::GetName()
 {
-	return this->name;
+	return Client::name;
 }
